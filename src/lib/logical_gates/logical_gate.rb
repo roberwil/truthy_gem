@@ -23,8 +23,20 @@ class LogicalGate
     self.not self.or(a, b, others)
   end
 
+  def self.xor(a, b, *others)
+    result = self.base_xor a, b
+    others.each { |term| result = base_xor(result, term)}
+    result
+  end
 
+  def self.xnor(a, b, *others)
+    self.not self.xor(a, b, others)
+  end
 
+  private
+  def self.base_xor(a, b)
+    a ^ b
+  end
 end
 
 class TrueClass
