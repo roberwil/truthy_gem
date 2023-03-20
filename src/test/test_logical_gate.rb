@@ -62,6 +62,47 @@ class LogicalGateTest < Minitest::Test
     end
   end
 
+  describe "OR Gate for Integers is valid with two inputs" do
+    [
+      [1, 1, 1],
+      [1, 0, 1],
+      [0, 1, 1],
+      [0, 0, 0]
+    ].each do |boolean_set|
+
+      a = boolean_set[0]
+      b = boolean_set[1]
+
+      actual   = a.or(b)
+      expected = boolean_set[-1]
+
+      it "#{boolean_set[..-2]} should be #{expected}" do
+        assert_equal expected, actual
+      end
+    end
+  end
+
+  describe "OR Gate for Integers is valid with three inputs" do
+    [
+      [1, 1, 1, 1],
+      [1, 0, 0, 1],
+      [0, 1, 1, 1],
+      [0, 0, 0, 0]
+    ].each do |boolean_set|
+
+      a = boolean_set[0]
+      b = boolean_set[1]
+
+      actual   = LogicalGate.or(a, b, boolean_set[2..-2].first)
+      expected = boolean_set[-1]
+
+      it "#{boolean_set[..-2]} should be #{expected}" do
+        assert_equal expected, actual
+      end
+    end
+  end
+
+
   describe "NOR Gate is valid with two inputs" do
     [
       [true,  true,  false],

@@ -59,3 +59,17 @@ class FalseClass
     LogicalGate.xnor self, b, others
   end
 end
+
+class Integer
+  def not
+    LogicalGate.not self
+  end
+
+  def or(b, *others)
+    LogicalGate.or self, b, others
+  end
+
+  def and(b, *others)
+    LogicalGate.and self, b, others
+  end
+end
