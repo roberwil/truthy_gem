@@ -2,12 +2,14 @@
 
 class LogicalGate
   def self.not(a)
-    !a
+    return inot(a) if a.is_a? Integer
+    return !a
   end
 
   def self.and(a, b, *others)
+    return self.iand(a, b, others) if a.is_a? Integer
     return false if (others.include? false) || !a || !b
-    true
+    return true
   end
 
   def self.nand(a, b, *others)
@@ -15,8 +17,9 @@ class LogicalGate
   end
 
   def self.or(a, b, *others)
+    return self.ior(a, b, others) if a.is_a? Integer
     return true if others.include? true || a || b
-    false
+    return false
   end
 
   def self.nor(a, b, *others)
@@ -37,10 +40,22 @@ class LogicalGate
   def self.base_xor(a, b)
     a ^ b
   end
-end
 
-class TrueClass
-  def and(b, *others)
-    LogicalGate.and(self, b, others)
+  def self.to_bool(a)
+    a == 1? true : false
+  end
+
+  def self.inot(a)
+    self.not self.to_bool(a)
+  end
+
+  def self.iand(a, b, *others)
+    return false if others.include? 0 || a == 0 || b == 0
+    return true
+  end
+
+  def self.ior(a, b, *others)
+    return true if others.include? 1 || a == 1 || b == 1
+    return false
   end
 end
