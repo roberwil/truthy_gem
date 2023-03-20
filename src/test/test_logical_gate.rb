@@ -32,7 +32,8 @@ class LogicalGateTest < Minitest::Test
       a = boolean_set[0]
       b = boolean_set[1]
 
-      actual   = LogicalGate.or(a, b)
+      #actual   = LogicalGate.or(a, b)
+      actual   = a.or(b)
       expected = boolean_set[-1]
 
       it "#{boolean_set[..-2]} should be #{expected}" do
