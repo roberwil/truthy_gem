@@ -102,7 +102,6 @@ class LogicalGateTest < Minitest::Test
     end
   end
 
-
   describe "NOR Gate is valid with two inputs" do
     [
       [true,  true,  false],
@@ -278,7 +277,7 @@ class LogicalGateTest < Minitest::Test
       a = boolean_set[0]
       b = boolean_set[1]
 
-      actual   = LogicalGate.xnor(a, b)
+      actual   = !LogicalGate.xor(a, b)
       expected = boolean_set[-1]
 
       it "#{boolean_set[..-2]} should be #{expected}" do
@@ -297,8 +296,9 @@ class LogicalGateTest < Minitest::Test
 
       a = boolean_set[0]
       b = boolean_set[1]
+      c = boolean_set[2]
 
-      actual   = LogicalGate.xnor(a, b, boolean_set[2..-2].first)
+      actual   = LogicalGate.xnor(a, b, c)
       expected = boolean_set[-1]
 
       it "#{boolean_set[..-2]} should be #{expected}" do

@@ -31,16 +31,16 @@ class LogicalGate
       result = base_xor(result, term)
     end
 
-    result
+    return result
   end
 
   def self.xnor(a, b, *others)
-    self.not self.xor(a, b, others)
+    return !self.xor(a, b, others)
   end
 
   private
   def self.base_xor(a, b)
-    a ^ b
+    a != b
   end
 
   def self.inot(a)
