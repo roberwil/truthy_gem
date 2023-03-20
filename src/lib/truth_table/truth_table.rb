@@ -38,9 +38,30 @@ class TruthTable
     @number_of_ones  = 0
   end
 
+  def add_row(*terms)
+  end
 
+  def check(*terms)
+  end
+
+  def to_s
+    super
+  end
 
   private
+
+  def row_is_valid?(row)
+  end
+
+  def compute(row)
+  end
+
+  def change_algorithm_if_needed
+  end
+
+  def self.get_row_cache_code(*terms)
+  end
+
   def use_sum_of_products
     @using_sum_of_products = true
     @using_product_of_sums = false
