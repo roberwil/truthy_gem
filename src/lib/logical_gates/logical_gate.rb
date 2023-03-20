@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class LogicalGate
   def self.not(a)
     return inot(a) if a.is_a? Integer
@@ -8,7 +6,7 @@ class LogicalGate
 
   def self.and(a, b, *others)
     return self.iand(a, b, others) if a.is_a? Integer
-    return false if (others.include? false) || !a || !b
+    return false if (others.include?(false) || !a || !b)
     return true
   end
 
@@ -18,7 +16,7 @@ class LogicalGate
 
   def self.or(a, b, *others)
     return self.ior(a, b, others) if a.is_a? Integer
-    return true if others.include? true || a || b
+    return true if others.include?(true) || a || b
     return false
   end
 
@@ -50,12 +48,12 @@ class LogicalGate
   end
 
   def self.iand(a, b, *others)
-    return false if others.include? 0 || a == 0 || b == 0
+    return false if others.include?(0) || a == 0 || b == 0
     return true
   end
 
   def self.ior(a, b, *others)
-    return true if others.include? 1 || a == 1 || b == 1
+    return true if others.include?(1) || a == 1 || b == 1
     return false
   end
 end
