@@ -26,7 +26,11 @@ class LogicalGate
 
   def self.xor(a, b, *others)
     result = self.base_xor a, b
-    others.each { |term| result = base_xor(result, term)}
+
+    others.each do |term|
+      result = base_xor(result, term)
+    end
+
     result
   end
 

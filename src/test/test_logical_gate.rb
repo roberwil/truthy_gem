@@ -50,7 +50,7 @@ class LogicalGateTest < Minitest::Test
       a = boolean_set[0]
       b = boolean_set[1]
 
-      actual   = LogicalGate.or(a, b, boolean_set[2..-2])
+      actual   = LogicalGate.or(a, b, boolean_set[2..-2].first)
       expected = boolean_set[-1]
 
       it "#{boolean_set[..-2]} should be #{expected}" do
@@ -90,7 +90,7 @@ class LogicalGateTest < Minitest::Test
       a = boolean_set[0]
       b = boolean_set[1]
 
-      actual   = LogicalGate.and(a, b, boolean_set[2..-2])
+      actual   = LogicalGate.and(a, b, boolean_set[2..-2].first)
       expected = boolean_set[-1]
 
       it "#{boolean_set[..-2]} should be #{expected}" do
@@ -124,13 +124,13 @@ class LogicalGateTest < Minitest::Test
       [true,  true,  true,  true],
       [true,  false, false, true],
       [false, true,  true,  false],
-      [false, false, false, true]
+      [false, false, false, false]
     ].each do |boolean_set|
 
       a = boolean_set[0]
       b = boolean_set[1]
 
-      actual   = LogicalGate.xor(a, b, boolean_set[2..-2])
+      actual   = LogicalGate.xor(a, b, boolean_set[2..-2].first)
       expected = boolean_set[-1]
 
       it "#{boolean_set[..-2]} should be #{expected}" do
