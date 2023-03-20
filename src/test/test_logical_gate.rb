@@ -19,6 +19,8 @@ class LogicalGateTest < Minitest::Test
     end
   end
 
+  # OR and NOR gates here
+
   describe "OR Gate is valid with two inputs" do
     [
       [true,  true,  true],
@@ -59,7 +61,49 @@ class LogicalGateTest < Minitest::Test
     end
   end
 
-  describe "AND Gate is valid" do
+  describe "NOR Gate is valid with two inputs" do
+    [
+      [true,  true,  false],
+      [true,  false, false],
+      [false, true,  false],
+      [false, false, true]
+    ].each do |boolean_set|
+
+      a = boolean_set[0]
+      b = boolean_set[1]
+
+      actual   = LogicalGate.nor(a, b)
+      expected = boolean_set[-1]
+
+      it "#{boolean_set[..-2]} should be #{expected}" do
+        assert_equal expected, actual
+      end
+    end
+  end
+
+  describe "NOR Gate is valid with three inputs" do
+    [
+      [true,  true,  true,  false],
+      [true,  false, false, false],
+      [false, true,  true,  false],
+      [false, false, false, true]
+    ].each do |boolean_set|
+
+      a = boolean_set[0]
+      b = boolean_set[1]
+
+      actual   = LogicalGate.nor(a, b, boolean_set[2..-2].first)
+      expected = boolean_set[-1]
+
+      it "#{boolean_set[..-2]} should be #{expected}" do
+        assert_equal expected, actual
+      end
+    end
+  end
+
+  # AND and NAND gates here
+
+  describe "AND Gate is valid with two inputs" do
     [
       [true,  true,  true],
       [true,  false, false],
@@ -99,7 +143,49 @@ class LogicalGateTest < Minitest::Test
     end
   end
 
-  describe "XOR Gate is valid" do
+  describe "NAND Gate is valid with two inputs" do
+    [
+      [true,  true,  false],
+      [true,  false, true],
+      [false, true,  true],
+      [false, false, true]
+    ].each do |boolean_set|
+
+      a = boolean_set[0]
+      b = boolean_set[1]
+
+      actual   = LogicalGate.nand(a, b)
+      expected = boolean_set[-1]
+
+      it "#{boolean_set[..-2]} should be #{expected}" do
+        assert_equal expected, actual
+      end
+    end
+  end
+
+  describe "NAND Gate is valid with three inputs" do
+    [
+      [true,  true,  true,  false],
+      [true,  false, false, true],
+      [false, true,  true,  true],
+      [false, false, false, true]
+    ].each do |boolean_set|
+
+      a = boolean_set[0]
+      b = boolean_set[1]
+
+      actual   = LogicalGate.nand(a, b, boolean_set[2..-2].first)
+      expected = boolean_set[-1]
+
+      it "#{boolean_set[..-2]} should be #{expected}" do
+        assert_equal expected, actual
+      end
+    end
+  end
+
+  # XOR and XNOR gates
+
+  describe "XOR Gate is valid with two inputs" do
     [
       [true,  true,  false],
       [true,  false, true],
@@ -131,6 +217,46 @@ class LogicalGateTest < Minitest::Test
       b = boolean_set[1]
 
       actual   = LogicalGate.xor(a, b, boolean_set[2..-2].first)
+      expected = boolean_set[-1]
+
+      it "#{boolean_set[..-2]} should be #{expected}" do
+        assert_equal expected, actual
+      end
+    end
+  end
+
+  describe "XNOR Gate is valid with two inputs" do
+    [
+      [true,  true,  true],
+      [true,  false, false],
+      [false, true,  false],
+      [false, false, true]
+    ].each do |boolean_set|
+
+      a = boolean_set[0]
+      b = boolean_set[1]
+
+      actual   = LogicalGate.xnor(a, b)
+      expected = boolean_set[-1]
+
+      it "#{boolean_set[..-2]} should be #{expected}" do
+        assert_equal expected, actual
+      end
+    end
+  end
+
+  describe "XNOR Gate is valid with three inputs" do
+    [
+      [true,  true,  true,  false],
+      [true,  false, false, false],
+      [false, true,  true,  true],
+      [false, false, false, true]
+    ].each do |boolean_set|
+
+      a = boolean_set[0]
+      b = boolean_set[1]
+
+      actual   = LogicalGate.xnor(a, b, boolean_set[2..-2].first)
       expected = boolean_set[-1]
 
       it "#{boolean_set[..-2]} should be #{expected}" do

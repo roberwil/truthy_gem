@@ -43,21 +43,17 @@ class LogicalGate
     a ^ b
   end
 
-  def self.to_bool(a)
-    a == 1? true : false
-  end
-
   def self.inot(a)
-    self.not self.to_bool(a)
+    a == 1? 0 : 1
   end
 
   def self.iand(a, b, *others)
-    return false if others.include?(0) || a == 0 || b == 0
-    return true
+    return 0 if others.include?(0) || a == 0 || b == 0
+    return 1
   end
 
   def self.ior(a, b, *others)
-    return true if others.include?(1) || a == 1 || b == 1
-    return false
+    return 1 if others.include?(1) || a == 1 || b == 1
+    return 0
   end
 end
