@@ -1,11 +1,12 @@
+require_relative '../logical_gates/logical_gate_extension'
 
 class TruthTable
   @@letters = %w[A B C D E F G H I J]
 
   @@combinations = {
-    02 => 004, 03 => 008, 04 => 0016,
-    05 => 032, 06 => 064, 07 => 0128,
-    08 => 256, 09 => 512, 10 => 1024
+    2 =>  04, 3 =>   8,  4 =>   16,
+    5 =>  32, 6 =>  64,  7 =>  128,
+    8 => 256, 9 => 512, 10 => 1024
   }
 
   MAX_LIMIT   = 6
@@ -52,10 +53,10 @@ class TruthTable
 
   def row_is_valid?(row)
     @rows.each do |existing_row|
-      is_equal = true;
+      is_equal = true
 
       (0..existing_row.size - 1).each do |i|
-        is_equal = is_equal.And(row[i] == existing_row[i])
+        is_equal = is_equal.and(row[i] == existing_row[i])
       end
 
       return false if is_equal
@@ -65,6 +66,18 @@ class TruthTable
   end
 
   def compute(row)
+    row_output = row[-1]
+
+    return if @using_sum_of_products.and(row_output != 1)
+    return if @using_product_of_sums.and(row_output != 0)
+
+    (0..row.size - 1).each do |i|
+      if @using_sum_of_products
+        @formula << (row[i] == 1)? SELF : COMPLEMENT
+      else
+        @formula << (row[i] == 1)? COMPLEMENT : SELF
+      end
+    end
   end
 
   def change_algorithm_if_needed
