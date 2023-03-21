@@ -1,5 +1,3 @@
-require_relative '../logical_gates/logical_gate_extension'
-
 class TruthTable
   @@letters = %w[A B C D E F G H I J]
 
@@ -40,11 +38,43 @@ class TruthTable
   end
 
   def add_row(*terms)
+    table_has_enough_rows = @rows.size == @number_of_combinations
+
+    if table_has_enough_rows
+      raise TruthyException, "There should be only #{@number_of_combinations} rows."
+    end
+
+    right_number_of_terms = terms.size == @number_of_terms + 1
+
+    unless right_number_of_terms
+      raise TruthyException, "There should be only #{@number_of_terms} terms."
+    end
+
+    row = terms
+
+    unless row_is_valid? row
+      raise TruthyException, "The combination #{row} has been used already."
+    end
+
+    @cache = {}
+
+    row_output = row[-1]
+    change_algorithm = (@rows.size == 0).and(row_output == 0)
+
+    use_product_of_sums if change_algorithm
+
+    @rows << row
+    (row_output == 1)? @number_of_ones += 1 : @number_of_zeros += 1
+
+    compute row
   end
 
   def check(*terms)
     has_right_number_of_terms = terms.size != @number_of_terms
-    raise TruthyException, "There should be only #{@number_of_terms} terms." unless has_right_number_of_terms
+
+    unless has_right_number_of_terms
+      raise TruthyException, "There should be only #{@number_of_terms} terms."
+    end
 
     change_algorithm_if_needed
 
@@ -90,11 +120,10 @@ class TruthTable
   end
 
   def to_s
-    super
+
   end
 
   private
-
   def row_is_valid?(row)
     @rows.each do |existing_row|
       is_equal = true
@@ -140,17 +169,11 @@ class TruthTable
     more_zeros ? use_sum_of_products : use_product_of_sums
 
     @formula = []
-    @cache   = []
+    @cache   = {}
 
     @rows.each do |row|
       compute row
     end
-  end
-
-  def self.get_row_cache_code(*terms)
-    code = ''
-    terms.each { |term| code += term ? TRUE_VALUE : FALSE_VALUE }
-    return code
   end
 
   def use_sum_of_products
@@ -161,5 +184,11 @@ class TruthTable
   def use_product_of_sums
     @using_sum_of_products = false
     @using_product_of_sums = true
+  end
+
+  def self.get_row_cache_code(*terms)
+    code = ''
+    terms.each { |term| code += term ? TRUE_VALUE : FALSE_VALUE }
+    return code
   end
 end
