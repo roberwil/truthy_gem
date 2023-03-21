@@ -43,6 +43,50 @@ class TruthTable
   end
 
   def check(*terms)
+    has_right_number_of_terms = terms.size != @number_of_terms
+    raise TruthyException, "There should be only #{@number_of_terms} terms." unless has_right_number_of_terms
+
+    change_algorithm_if_needed
+
+    cache_code   = TruthTable.get_row_cache_code terms
+    cache_result = @cache[cache_code]
+
+    return cache_result unless cache_result.nil?
+
+    terms_cursor = 0
+    partial_result = true
+    result = false
+
+    if @using_product_of_sums
+      partial_result = false
+      result = true
+    end
+
+    @formula.each do |t|
+      if @using_sum_of_products
+        partial_result = (t == SELF) ? partial_result.and(terms[terms_cursor]) :
+                           partial_result.and(!terms[terms_cursor])
+      else
+        partial_result = (t == SELF)? partial_result.or(terms[terms_cursor]) :
+                           partial_result.or(!terms[terms_cursor])
+      end
+
+      terms_cursor += 1
+      next if terms_cursor != @number_of_terms
+
+      if (@using_sum_of_products)
+        return true if partial_result
+        result = result.or(partial_result)
+        partial_result = true
+      else
+        return false unless partial_result
+        result = result.and(partial_result)
+        partial_result = false
+      end
+    end
+
+    @cache[cache_code] = result
+    return result
   end
 
   def to_s
