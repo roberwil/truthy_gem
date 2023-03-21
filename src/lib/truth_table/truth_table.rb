@@ -120,7 +120,25 @@ class TruthTable
   end
 
   def to_s
+    terms_cursor   = 0
+    partial_result = ''
+    result         = ''
 
+    @formula.each do |t|
+      if @using_sum_of_products
+        partial_result += (t == SELF)? "#{@@letters[terms_cursor]}." : "~#{@@letters[terms_cursor]}."
+      else
+        partial_result += (t == SELF)? "#{@@letters[terms_cursor]}+" : "~#{@@letters[terms_cursor]}+"
+      end
+
+      terms_cursor += 1
+      next if terms_cursor != @number_of_terms
+
+      result += @using_sum_of_products? "(#{partial_result[0..-2]})+" : "(#{partial_result[0..-2]})."
+      partial_result = ''
+    end
+
+    result[0..-2]
   end
 
   private
