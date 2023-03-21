@@ -104,6 +104,9 @@ class TruthTable
   end
 
   def self.get_row_cache_code(*terms)
+    code = ''
+    terms.each { |term| code += term ? TRUE_VALUE : FALSE_VALUE }
+    return code
   end
 
   def use_sum_of_products
@@ -115,5 +118,4 @@ class TruthTable
     @using_sum_of_products = false
     @using_product_of_sums = true
   end
-
 end
