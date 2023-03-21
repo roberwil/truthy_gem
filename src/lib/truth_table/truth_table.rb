@@ -51,6 +51,17 @@ class TruthTable
   private
 
   def row_is_valid?(row)
+    @rows.each do |existing_row|
+      is_equal = true;
+
+      (0..existing_row.size - 1).each do |i|
+        is_equal = is_equal.And(row[i] == existing_row[i])
+      end
+
+      return false if is_equal
+    end
+
+    return true
   end
 
   def compute(row)
