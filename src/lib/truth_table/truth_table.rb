@@ -81,6 +81,26 @@ class TruthTable
   end
 
   def change_algorithm_if_needed
+    no_need_to_change = @using_sum_of_products.and(@number_of_zeros == 0).
+      or(@using_product_of_sums.and(@number_of_ones == 0))
+
+    return if no_need_to_change
+
+    more_zeros = @number_of_zeros >= @number_of_ones
+
+    no_need_to_change = @using_sum_of_products.and(more_zeros).
+      or(@using_product_of_sums.and(!more_zeros))
+
+    return if no_need_to_change
+
+    more_zeros ? use_sum_of_products : use_product_of_sums
+
+    @formula = []
+    @cache   = []
+
+    @rows.each do |row|
+      compute row
+    end
   end
 
   def self.get_row_cache_code(*terms)
