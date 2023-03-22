@@ -1,3 +1,6 @@
+require_relative 'truthy_exception'
+require_relative '../logical_gates/logical_gate_extension'
+
 class TruthTable
   @@letters = %w[A B C D E F G H I J]
 
@@ -7,13 +10,12 @@ class TruthTable
     8 => 256, 9 => 512, 10 => 1024
   }
 
-  MAX_LIMIT   = 6
-  MIN_LIMIT   = 2
+  MAX_LIMIT   =  6
+  MIN_LIMIT   =  2
   SELF        = 'S'
   COMPLEMENT  = 'C'
   TRUE_VALUE  = 'T'
   FALSE_VALUE = 'F'
-
 
   def initialize(number_of_terms)
     case number_of_terms
@@ -70,7 +72,7 @@ class TruthTable
   end
 
   def check(*terms)
-    has_right_number_of_terms = terms.size != @number_of_terms
+    has_right_number_of_terms = terms.size == @number_of_terms
 
     unless has_right_number_of_terms
       raise TruthyException, "There should be only #{@number_of_terms} terms."
@@ -126,19 +128,20 @@ class TruthTable
 
     @formula.each do |t|
       if @using_sum_of_products
-        partial_result += (t == SELF)? "#{@@letters[terms_cursor]}." : "~#{@@letters[terms_cursor]}."
+        partial_result += (t == SELF ? "#{@@letters[terms_cursor]}." : "~#{@@letters[terms_cursor]}.")
       else
-        partial_result += (t == SELF)? "#{@@letters[terms_cursor]}+" : "~#{@@letters[terms_cursor]}+"
+        partial_result += (t == SELF ? "#{@@letters[terms_cursor]}+" : "~#{@@letters[terms_cursor]}+")
       end
 
       terms_cursor += 1
       next if terms_cursor != @number_of_terms
+      terms_cursor = 0
 
-      result += @using_sum_of_products? "(#{partial_result[0..-2]})+" : "(#{partial_result[0..-2]})."
+      result += (@using_sum_of_products? "(#{partial_result[0...-1]})+" : "(#{partial_result[0...-1]}).")
       partial_result = ''
     end
 
-    result[0..-2]
+    result[0...-1]
   end
 
   private
@@ -162,11 +165,11 @@ class TruthTable
     return if @using_sum_of_products.and(row_output != 1)
     return if @using_product_of_sums.and(row_output != 0)
 
-    (0..row.size - 1).each do |i|
+    (0...row.size - 1).each do |i|
       if @using_sum_of_products
-        @formula << (row[i] == 1)? SELF : COMPLEMENT
+        @formula << (row[i] == 1 ? SELF : COMPLEMENT)
       else
-        @formula << (row[i] == 1)? COMPLEMENT : SELF
+        @formula << (row[i] == 1 ? COMPLEMENT : SELF)
       end
     end
   end
