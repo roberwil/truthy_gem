@@ -1,0 +1,2 @@
+class TruthyException < StandardError
+end

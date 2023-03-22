@@ -1,8 +1,7 @@
-require 'minitest/spec'
 require 'minitest/autorun'
 require_relative '../lib/ada_truthy'
 
-class LogicalGateTest < Minitest::Test
+class TestLogicalGate < Minitest::Test
   describe "NOT Gate is valid" do
     [
       [true,  false],
@@ -298,7 +297,7 @@ class LogicalGateTest < Minitest::Test
       b = boolean_set[1]
       c = boolean_set[2]
 
-      actual   = LogicalGate.xnor(a, b, c)
+      actual   = !LogicalGate.xor(a, b, c)
       expected = boolean_set[-1]
 
       it "#{boolean_set[..-2]} should be #{expected}" do
