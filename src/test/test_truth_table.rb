@@ -63,6 +63,7 @@ class TestTruthTable < Minitest::Test
       b = boolean_set[1]
 
       t = TruthTable.new 2
+
       t.add_row 1, 1, 0
       t.add_row 1, 0, 0
       t.add_row 0, 1, 1
