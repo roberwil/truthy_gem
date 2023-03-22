@@ -1,6 +1,6 @@
 # Truthy Gem
 
-###### **Find nuget gem [here](#).**
+###### **Find nuget gem [here](https://rubygems.org/gems/ada_truthy).**
 
 ### What is truthy anyway?
 
