@@ -9,5 +9,5 @@ Gem::Specification.new do |s|
   s.homepage              = "https://github.com/roberwil/truthy_gem"
   s.license               = "MIT"
   s.required_ruby_version = '>= 2.7.7'
-  s.extra_rdoc_files      = ['../README.md']
+  s.extra_rdoc_files      = ['GEM_README.md']
 end
