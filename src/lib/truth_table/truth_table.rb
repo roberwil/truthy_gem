@@ -96,22 +96,23 @@ class TruthTable
 
     @formula.each do |t|
       if @using_sum_of_products
-        partial_result = (t == SELF) ? partial_result.and(terms[terms_cursor]) :
-                           partial_result.and(!terms[terms_cursor])
+        partial_result = (t == SELF ? partial_result.and(terms[terms_cursor]) :
+                           partial_result.and(!terms[terms_cursor]))
       else
-        partial_result = (t == SELF)? partial_result.or(terms[terms_cursor]) :
-                           partial_result.or(!terms[terms_cursor])
+        partial_result = (t == SELF ? partial_result.or(terms[terms_cursor]) :
+                           partial_result.or(!terms[terms_cursor]))
       end
 
       terms_cursor += 1
       next if terms_cursor != @number_of_terms
+      terms_cursor = 0
 
       if (@using_sum_of_products)
         return true if partial_result
         result = result.or(partial_result)
         partial_result = true
       else
-        return false unless partial_result
+        return false if not partial_result
         result = result.and(partial_result)
         partial_result = false
       end
@@ -180,7 +181,7 @@ class TruthTable
 
     return if no_need_to_change
 
-    more_zeros = @number_of_zeros >= @number_of_ones
+    more_zeros = @number_of_zeros > @number_of_ones
 
     no_need_to_change = @using_sum_of_products.and(more_zeros).
       or(@using_product_of_sums.and(!more_zeros))
@@ -207,9 +208,9 @@ class TruthTable
     @using_product_of_sums = true
   end
 
-  def self.get_row_cache_code(*terms)
+  def self.get_row_cache_code(terms)
     code = ''
-    terms.each { |term| code += term ? TRUE_VALUE : FALSE_VALUE }
+    terms.each { |term| code += (term ? TRUE_VALUE : FALSE_VALUE) }
     return code
   end
 end
