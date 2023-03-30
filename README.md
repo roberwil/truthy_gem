@@ -1,6 +1,10 @@
-# Truthy Gem
+# Truthy
 
 ###### **Find the gem [here](https://rubygems.org/gems/ada_truthy).**
+
+TL;DR;
+
+Same as [Truthy](https://github.com/roberwil/truthy), but for Ruby folks.
 
 ### What is truthy anyway?
 
@@ -28,6 +32,17 @@ Why stress your brain with bare booleans? Use Truthy!
 Let your imagination make good use of Truthy.
 
 ### Usage
+
+To install, add this line to your application's Gemfile:
+
+```ruby
+gem 'ada_truthy'
+```
+
+
+Or install it yourself as:
+
+    $ gem install ada_truthy
 
 Every functionality is under `ada_truthy` namespace. Some methods throw an exception, the `TruthyException`.
 
