@@ -1,7 +1,8 @@
-require 'minitest/autorun'
-require_relative '../lib/ada_truthy'
+require_relative 'test_helper'
+LogicalGate = AdaTruthy::LogicalGate
 
-class TestLogicalGate < Minitest::Test
+describe "Logical Gates" do
+
   describe "NOT Gate is valid" do
     [
       [true,  false],
@@ -35,7 +36,7 @@ class TestLogicalGate < Minitest::Test
       actual   = a.or(b)
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
@@ -55,7 +56,7 @@ class TestLogicalGate < Minitest::Test
       actual   = LogicalGate.or(a, b, boolean_set[2..-2].first)
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
@@ -75,7 +76,7 @@ class TestLogicalGate < Minitest::Test
       actual   = a.or(b)
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
@@ -95,7 +96,7 @@ class TestLogicalGate < Minitest::Test
       actual   = LogicalGate.or(a, b, boolean_set[2..-2].first)
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
@@ -115,7 +116,7 @@ class TestLogicalGate < Minitest::Test
       actual   = LogicalGate.nor(a, b)
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
@@ -135,7 +136,7 @@ class TestLogicalGate < Minitest::Test
       actual   = LogicalGate.nor(a, b, boolean_set[2..-2].first)
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
@@ -157,7 +158,7 @@ class TestLogicalGate < Minitest::Test
       actual   = LogicalGate.and(a, b)
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
@@ -177,7 +178,7 @@ class TestLogicalGate < Minitest::Test
       actual   = LogicalGate.and(a, b, boolean_set[2..-2].first)
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
@@ -197,7 +198,7 @@ class TestLogicalGate < Minitest::Test
       actual   = LogicalGate.nand(a, b)
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
@@ -217,7 +218,7 @@ class TestLogicalGate < Minitest::Test
       actual   = LogicalGate.nand(a, b, boolean_set[2..-2].first)
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
@@ -239,7 +240,7 @@ class TestLogicalGate < Minitest::Test
       actual   = LogicalGate.xor(a, b)
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
@@ -259,7 +260,7 @@ class TestLogicalGate < Minitest::Test
       actual   = LogicalGate.xor(a, b, boolean_set[2..-2].first)
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
@@ -279,7 +280,7 @@ class TestLogicalGate < Minitest::Test
       actual   = !LogicalGate.xor(a, b)
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
@@ -300,7 +301,7 @@ class TestLogicalGate < Minitest::Test
       actual   = !LogicalGate.xor(a, b, c)
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end

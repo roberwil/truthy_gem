@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/src.iml" filepath="$PROJECT_DIR$/.idea/modules/src.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/truthy_gem.iml" filepath="$PROJECT_DIR$/.idea/truthy_gem.iml" />
     </modules>
   </component>

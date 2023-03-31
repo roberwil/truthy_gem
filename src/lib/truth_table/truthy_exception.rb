@@ -1,2 +1,0 @@
-class TruthyException < StandardError
-end

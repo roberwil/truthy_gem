@@ -6,7 +6,7 @@ TL;DR;
 
 Same as [Truthy](https://github.com/roberwil/truthy), but for Ruby folks.
 
-### What is truthy anyway?
+## What is truthy anyway?
 
 Well, think of truth table you just invented, you put your 1s and 0s and **Truthy** figures out which formula works
 for the table.
@@ -22,7 +22,7 @@ If you create the above table with **Truthy**, it will know what to do so that y
 Also, **Truthy** has implementations for the following logical gates: `and`, `or`, `not`,
 `xor`, `nand`, `nor`, and `xnor`.
 
-### Where can I use it?
+## Where can I use it?
 
 - Access matrices are a good example;
 - Other examples are just day-to-day comparisons you do with booleans in your code.
@@ -31,7 +31,7 @@ Why stress your brain with bare booleans? Use Truthy!
 
 Let your imagination make good use of Truthy.
 
-### Usage
+## Usage
 
 To install, add this line to your application's Gemfile:
 
@@ -50,7 +50,13 @@ Every functionality is under `ada_truthy` namespace. Some methods throw an excep
 require 'ada_truthy'
 ```
 
-#### Truth Table
+### Truth Table
+
+**Note: For versions >= 1.1.0, the examples bellow assume the following was defined**
+
+```ruby
+TruthTable = AdaTruthy::TruthTable
+```
 
 To create a truth table, you do as follows:
 
@@ -133,7 +139,13 @@ t.check(true, false)  # > true
 t.to_s # > (~A+~B)
 ```
 
-#### Logical Gates
+### Logical Gates
+
+**Note: For versions >= 1.1.0, the examples bellow assume the following was defined**
+
+```ruby
+LogicalGate = AdaTruthy::LogicalGate
+```
 
 The logical gates are all found in the `LogicalGate` class, but there are also extension methods for booleans.
 All operations support multiple terms and accept a minimum of 2 terms, except `.not()` which accepts only 1 term.
@@ -219,3 +231,26 @@ c = (2+1==5)
 a.xnor(b) # > true
 a.xnor(c) # > false
 ```
+
+## Development
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test`
+to run the tests. You can also run `bin/console` for an interactive prompt that will allow
+you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a
+new version, update the version number in `version.rb`, and then run `bundle exec rake release`,
+which will create a git tag for the version, push git commits and tags, and push the `.gem`
+file to [rubygems.org](https://rubygems.org).
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/roberwil/truthy_gem.
+This project is intended to be a safe, welcoming space for collaboration, and contributors are
+expected to adhere to the [code of conduct](https://github.com/roberwil/truthy_gem/blob/main/CODE_OF_CONDUCT.md).
+
+
+## Code of Conduct
+
+Everyone interacting in the AdaNumbers project's codebases, issue trackers, chat rooms and
+mailing lists is expected to follow the [code of conduct](https://github.com/roberwil/truthy_gem/blob/main/CODE_OF_CONDUCT.md).

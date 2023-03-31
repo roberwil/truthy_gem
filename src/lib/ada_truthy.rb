@@ -1,4 +1,5 @@
-require_relative 'logical_gates/logical_gate_extension'
-require_relative 'truth_table/truth_table'
+require_relative 'ada_truthy/version'
+require_relative 'ada_truthy/logical_gates/logical_gate_extension'
+require_relative 'ada_truthy/truth_table/truth_table'
 
 
