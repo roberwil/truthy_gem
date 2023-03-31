@@ -4,6 +4,6 @@
 
 - Core functionalities
 
-## 1.1.0
+## 1.2.0
 
 - Now, all code is under `AdaTruthy` module to avoid conflict with any other gem.
