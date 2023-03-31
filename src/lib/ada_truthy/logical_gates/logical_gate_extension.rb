@@ -1,6 +1,7 @@
 require_relative 'logical_gate'
 
 class TrueClass
+  LogicalGate = AdaTruthy::LogicalGate
   def not
     LogicalGate.not self
   end
@@ -31,6 +32,7 @@ class TrueClass
 end
 
 class FalseClass
+  LogicalGate = AdaTruthy::LogicalGate
   def not
     LogicalGate.not self
   end

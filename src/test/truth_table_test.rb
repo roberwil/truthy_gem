@@ -1,7 +1,7 @@
-require 'minitest/autorun'
-require_relative '../lib/ada_truthy'
+require_relative 'test_helper'
+TruthTable = AdaTruthy::TruthTable
 
-class TestTruthTable < Minitest::Test
+describe "Truth table" do
   describe "Truth table with 1 row has right formula" do
     t = TruthTable.new 2
     t.add_row 1, 1, 0
@@ -45,7 +45,7 @@ class TestTruthTable < Minitest::Test
       actual   = t.check a, b
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
@@ -72,7 +72,7 @@ class TestTruthTable < Minitest::Test
       actual   = t.check a, b
       expected = boolean_set[-1]
 
-      it "#{boolean_set[..-2]} should be #{expected}" do
+      it "#{boolean_set[0..-2]} should be #{expected}" do
         assert_equal expected, actual
       end
     end
